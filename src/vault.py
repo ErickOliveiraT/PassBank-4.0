@@ -37,7 +37,6 @@ def encrypt(filepath: str, password: str):
         file.close()
 
 def decrypt(filepath: str, password: str):
-    print(filepath, password)
     key = hashing.to_fernet_key(password)
     fernet = Fernet(key)
     try:
