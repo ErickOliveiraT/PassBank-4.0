@@ -9,7 +9,6 @@ PassBank 4.0 is a simple yet secure password manager written in Python. It allow
 - **Password Generator**: PassBank includes a built-in password generator that can create strong and unique passwords.
 - **Cross-Platform Compatibility**: PassBank is compatible with Windows, macOS, and Linux operating systems.
 - **Import/Export Functionality**: Users can import existing password data or export their stored passwords for backup purposes.
-- **Auto-Locking**: PassBank automatically locks after a period of inactivity to prevent unauthorized access.
 
 ## Installation
 
