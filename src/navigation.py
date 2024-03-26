@@ -7,6 +7,7 @@ def new_vault(window: sg.Window):
 
 def main_menu(window: sg.Window):
     window['MAIN'].update(visible=True)
+    window['PASSWORDS_GENERATOR'].update(visible=False)
     window['CREATE_VAULT'].update(visible=False)
     return
 
@@ -30,4 +31,9 @@ def vault_opened(window: sg.Window):
     window['MAIN'].update(visible=False)
     window['INSERT_PASSWORD'].update(visible=False)
     window['VAULT_OPENED'].update(visible=True)
+    return
+
+def password_generator(window: sg.Window):
+    window['PASSWORDS_GENERATOR'].update(visible=True)
+    window['MAIN'].update(visible=False)
     return

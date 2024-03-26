@@ -1,12 +1,13 @@
 import PySimpleGUI as sg
 import navigation
+import passwords
 import handles
 
 # Layouts
 start = [
     [sg.Text('Open vault'), sg.Input(key='filepath', ), sg.FileBrowse()],
     [sg.Text('Password'), sg.Input(key='password', password_char='*'), sg.Checkbox('Show password', key='show_password', enable_events=True)],
-    [sg.Button('Open'), sg.Button('Create new Vault'), sg.Button('Exit')]
+    [sg.Button('Open'), sg.Button('Create new Vault'), sg.Button('Generate Password'), sg.Button('Exit')]
 ]
 
 vault_creation = [
@@ -34,12 +35,22 @@ passwords_view = [
     [sg.Button('Insert new password'), sg.Button('Exit')]
 ]
 
+passwords_generator = [
+    [sg.Text('Password length'), sg.Spin(passwords.get_pass_length_range(), size=(7, 1), initial_value=16, key='password_length')],
+    [sg.Checkbox('Uppercase', key='uppercase')],
+    [sg.Checkbox('Numbers', key='numbers')],
+    [sg.Checkbox('Special characters', key='special_chars')],
+    [sg.Input(key='generated_password', size=(50, 1))],
+    [sg.Button('Generate'), sg.Button('Copy'), sg.Button('Back')]
+]
+
 layout = [[
     sg.Column(start, key='MAIN'), 
     sg.Column(vault_creation, visible=False, key='CREATE_VAULT'),
     sg.Column(vault_opened, visible=False, key='VAULT_OPENED'),
     sg.Column(password_insertion, visible=False, key='INSERT_PASSWORD'),
-    sg.Column(passwords_view, visible=False, key='PASSWORDS_VIEW')
+    sg.Column(passwords_view, visible=False, key='PASSWORDS_VIEW'),
+    sg.Column(passwords_generator, visible=False, key='PASSWORDS_GENERATOR')
 ]]
 
 # Globals
@@ -63,6 +74,8 @@ while True:
         navigation.vault_opened(window)
     elif event == 'Back':
         navigation.back(window)
+    elif event == 'Back6':
+        navigation.main_menu(window)
     elif event.startswith('Insert new password'):
         navigation.insert_password(window)
     elif event == 'Create new Vault':
@@ -74,6 +87,12 @@ while True:
     elif event == 'Create Vault':
         handles.vault_creation(values)
         navigation.main_menu(window)
+    elif event.startswith('Generate Password'):
+        navigation.password_generator(window)
+    elif event == 'Generate':
+        handles.generate_password(window, values)
+    elif event == 'Copy':
+        handles.copy_password(window)
     else:
         print('event:', event)
         print('values:', values)
