@@ -70,3 +70,18 @@ def show_passwords(window: sg.Window, event: str, values: dict):
             window['reg_password'].update(password_char='' if values['show_reg_password'] else '*')
             return
     return
+
+def generate_password(window: sg.Window, values: dict):
+    length = values['password_length']
+    uppercase = values['uppercase']
+    numbers = values['numbers']
+    special_chars = values['special_chars']
+    password = passwords.generate_password(length, uppercase, numbers, special_chars)
+    window['generated_password'].update(password)
+    return
+
+def copy_password(window: sg.Window):
+    password = window['generated_password'].get()
+    if len(password) > 0:
+        pyperclip.copy(password)
+    return
