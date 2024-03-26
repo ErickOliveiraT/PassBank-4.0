@@ -1,0 +1,4 @@
+cryptography==39.0.2
+pyperclip==1.8.2
+PySimpleGUI==5.0.3
+tinydb==4.8.0
